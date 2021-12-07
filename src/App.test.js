@@ -15,8 +15,3 @@ test('Simulating select for sort', () => {
   expect(options[1].selected).toBeFalsy();
   expect(options[2].selected).toBeFalsy();
 });
-
-test('Simulating input for filter', () => {
-  const { getByText, getByPlaceholderText, container, getByTestId, getAllByTestId } = render(<App />);
-  getByPlaceholderText('Filter by office').value = 'Leeds';
-});

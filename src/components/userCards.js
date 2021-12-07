@@ -14,18 +14,6 @@ class UserCards extends Component {
         this.setState({ isActive: !this.state.isActive });
     };
 
-    handleFilter = (e) => {
-        this.setState({ filterValue: e.target.value }, () => {
-            const { filterValue, data } = this.state;
-            let temp = [];
-            temp = data.filter(search => search.office === filterValue);
-            this.setState({
-                data: [...data, ...temp],
-                scrolling: false,
-            });
-        });
-    }
-
     handleSort = (e) => {
         this.setState({ sortValue: e.target.value }, () => {
             const { sortValue, data } = this.state;
@@ -83,17 +71,6 @@ class UserCards extends Component {
                                     <option data-testid="select-option" value='name'>Name</option>
                                     <option data-testid="select-option" value='office'>Office</option>
                                 </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-lg-4">
-                        <div className="form-group row">
-                            <label className="col-sm-4">Filter</label>
-                            <div className="col-sm-8">
-                                <input type="text" id="search" name="search" className="form-control" placeholder="Filter by office"
-                                    value={this.state.filterValue}
-                                    onChange={this.handleFilter}
-                                />
                             </div>
                         </div>
                     </div>
