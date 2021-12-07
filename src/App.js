@@ -1,7 +1,6 @@
 import Header from "./components/header";
 import UserCard from "./components/userCards";
 import Footer from "./components/footer";
-// import "./assets/css/animated.min.css";
 import "./assets/css/bootstrap.min.css";
 
 function App() {

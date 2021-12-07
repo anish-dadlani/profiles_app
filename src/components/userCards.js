@@ -17,7 +17,7 @@ class UserCards extends Component {
     handleFilter = (e) => {
         this.setState({ filterValue: e.target.value }, () => {
             const { filterValue, data } = this.state;
-            let temp;
+            let temp = [];
             temp = data.filter(search => search.office === filterValue);
             this.setState({
                 data: [...data, ...temp],
@@ -29,9 +29,9 @@ class UserCards extends Component {
     handleSort = (e) => {
         this.setState({ sortValue: e.target.value }, () => {
             const { sortValue, data } = this.state;
-            let temp;
+            let temp = [];
             if (sortValue === "name") {
-                temp = data.sort((a, b) => a.name.first > b.name.first ? 1 : -1);
+                temp = data.sort((a, b) => a.first > b.first ? 1 : -1);
             } else if (sortValue === "office") {
                 temp = data.sort((a, b) => a.office > b.office ? 1 : -1);
             }
@@ -74,14 +74,14 @@ class UserCards extends Component {
                 <div className="row mb-3">
                     <div className="col-lg-4">
                         <div className="form-group row">
-                            <label className="col-sm-4">Sorting</label>
+                            <label className="col-sm-4">Sort By</label>
                             <div className="col-sm-8">
-                                <select className="form-control" id="sort" name="sort"
+                                <select className="form-control" data-testid="select" name="sort"
                                     value={this.state.sortValue}
                                     onChange={this.handleSort}>
-                                    <option value=''>Select</option>
-                                    <option value='name'>Name</option>
-                                    <option value='office'>Office</option>
+                                    <option data-testid="select-option" value=''>Select</option>
+                                    <option data-testid="select-option" value='name'>Name</option>
+                                    <option data-testid="select-option" value='office'>Office</option>
                                 </select>
                             </div>
                         </div>
@@ -90,17 +90,10 @@ class UserCards extends Component {
                         <div className="form-group row">
                             <label className="col-sm-4">Filter</label>
                             <div className="col-sm-8">
-                                <input type="text" id="search" name="search" className="form-control" placeholder="Filter by name or office"
+                                <input type="text" id="search" name="search" className="form-control" placeholder="Filter by office"
                                     value={this.state.filterValue}
                                     onChange={this.handleFilter}
                                 />
-                                {/* <select className="form-control" id="filter" name="filter"
-                                    value={this.state.filterValue}
-                                    onChange={this.handleFilter}>
-                                    <option value=''>Select</option>
-                                    <option value='name'>Name</option>
-                                    <option value='office'>Office</option>
-                                </select> */}
                             </div>
                         </div>
                     </div>
@@ -115,21 +108,21 @@ class UserCards extends Component {
                                 <div className="card-body">
                                     <div className="avatar">
                                         <img
-                                            src={data.picture.large}
+                                            src={data.large}
                                             className="card-img-top"
                                             alt="" />
                                     </div>
                                     <h5 className="card-title"> {
-                                        this.uppercase(data.name.first)
+                                        this.uppercase(data.first)
                                         + " " +
-                                        this.uppercase(data.name.last)
+                                        this.uppercase(data.last)
                                     }</h5>
                                     <span className="icons-span">
-                                        <a href="https://www.linkedin.com" className=""><i className="fab fa-linkedin-in"></i></a>
-                                        <a href="https://www.github.com" className=""><i className="fab fa-github"></i></a>
-                                        <a href="https://www.twitter.com" className=""><i className="fab fa-twitter"></i></a>
+                                        <a href={this.uppercase(data.linkedin_url)} className=""><i className="fab fa-linkedin-in"></i></a>
+                                        <a href={this.uppercase(data.github_url)} className=""><i className="fab fa-github"></i></a>
+                                        <a href={this.uppercase(data.twitter_url)} className=""><i className="fab fa-twitter"></i></a>
                                     </span>
-                                    <p className="card-text"> {this.uppercase(data.office)} </p>
+                                    <p className="card-text" data-testid="office"> {this.uppercase(data.office)} </p>
                                 </div>
                             </div>
                         </div>
